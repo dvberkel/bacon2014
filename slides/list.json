@@ -1,4 +1,9 @@
 [
     "title.md",
-    "poc.html"
+    {
+	"filename": "poc.html",
+	"attr": {
+	    "data-state": "poc"
+	}
+    }
 ]
