@@ -1,4 +1,4 @@
-var RSA = (function(){
+var RSA = (function(BigNumber){
     var RSA = {};
 
     var Observable = RSA.Observable = function(){
@@ -13,6 +13,18 @@ var RSA = (function(){
 	}.bind(this));
     };
 
+    var rsaNumber = RSA.Number = function(number){
+	Observable.call(this);
+	this.set(number);
+    };
+    rsaNumber.prototype = new Observable();
+    rsaNumber.prototype.set = function(number){
+	this.setSource(new BigNumber(number));
+    };
+    rsaNumber.prototype.setSource = function(bigNumber){
+	this.source = bigNumber;
+	this.notify();
+    };
 
     return RSA;
-})();
+})(BigNumber);
