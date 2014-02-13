@@ -68,7 +68,8 @@ describe('RSA', function(){
 	    var derivatives = [
 		RSA.Product,
 		RSA.Sum,
-		RSA.Difference
+		RSA.Difference,
+		RSA.Modulus
 	    ];
 	    var m, n;
 
@@ -126,6 +127,15 @@ describe('RSA', function(){
 		    var result = BigNumber('-1');
 
 		    expect(difference.source.equals(result)).toBeTruthy();
+		});
+	    });
+
+	    describe('Modulus', function(){
+		it('should calculate Modulus', function(){
+		    var modulus = new RSA.Modulus(n, m);
+		    var result = BigNumber('1');
+
+		    expect(modulus.source.equals(result)).toBeTruthy();
 		});
 	    });
 	});

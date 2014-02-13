@@ -51,6 +51,9 @@ var RSA = (function(BigNumber){
     var Difference = RSA.Difference = derivedNumber(function(){
 	this.setSource(this.input[0].source.minus(this.input[1].source));
     });
+    var Modulus = RSA.Modulus = derivedNumber(function(){
+	this.setSource(this.input[0].source.modulo(this.input[1].source));
+    });
 
     return RSA;
 })(BigNumber);
