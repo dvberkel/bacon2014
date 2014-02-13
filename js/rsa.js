@@ -15,7 +15,7 @@ var RSA = (function(BigNumber){
 
     var rsaNumber = RSA.Number = function(number){
 	Observable.call(this);
-	this.set(number);
+	this.set(number || '1');
     };
     rsaNumber.prototype = new Observable();
     rsaNumber.prototype.set = function(number){
@@ -25,6 +25,26 @@ var RSA = (function(BigNumber){
 	this.source = bigNumber;
 	this.notify();
     };
+
+    var derivedNumber = function(calculation){
+	var DerivedNumber = function(){
+	    this.input = [];
+	    for(var index = 0; index < arguments.length; index++){
+		this.input.push(arguments[index]);
+	    }
+	    this.calculate();
+	};
+	DerivedNumber.prototype = new RSA.Number();
+	DerivedNumber.prototype.calculate = calculation;
+	return DerivedNumber;
+    }
+
+    var Product = RSA.Product = derivedNumber(function(){
+	this.setSource(this.input[0].source.times(this.input[1].source));
+    });
+    var Sum = RSA.Sum = derivedNumber(function(){
+	this.setSource(this.input[0].source.plus(this.input[1].source));
+    });
 
     return RSA;
 })(BigNumber);

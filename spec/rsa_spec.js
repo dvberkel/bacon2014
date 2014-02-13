@@ -63,5 +63,50 @@ describe('RSA', function(){
 
 	    expect(isCalled).toBeTruthy();
 	});
+
+	describe('Algebraic Derivatives', function(){
+	    var derivatives = [
+		RSA.Product,
+		RSA.Sum
+	    ];
+	    var m, n;
+
+	    beforeEach(function(){
+		m = new RSA.Number('2');
+		n = new RSA.Number('3');
+	    });
+
+	    it('should be defined', function(){
+		derivatives.forEach(function(derivative){
+		    expect(derivative).toBeDefined();
+		});
+	    });
+
+	    it('should be Number', function(){
+
+		derivatives.forEach(function(derivative){
+		    var derived = new derivative(m,n);
+		    expect(derived instanceof RSA.Number).toBeTruthy();
+		});
+	    });
+
+	    describe('Product', function(){
+		it('should calculate product', function(){
+		    var product = new RSA.Product(m, n);
+		    var result = BigNumber('6');
+
+		    expect(product.source.equals(result)).toBeTruthy();
+		});
+	    });
+
+	    describe('Sum', function(){
+		it('should calculate sum', function(){
+		    var sum = new RSA.Sum(m, n);
+		    var result = BigNumber('5');
+
+		    expect(sum.source.equals(result)).toBeTruthy();
+		});
+	    });
+	});
     });
 });
