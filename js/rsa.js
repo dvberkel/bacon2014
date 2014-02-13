@@ -45,6 +45,9 @@ var RSA = (function(BigNumber){
     var Sum = RSA.Sum = derivedNumber(function(){
 	this.setSource(this.input[0].source.plus(this.input[1].source));
     });
+    var Difference = RSA.Difference = derivedNumber(function(){
+	this.setSource(this.input[0].source.minus(this.input[1].source));
+    });
 
     return RSA;
 })(BigNumber);

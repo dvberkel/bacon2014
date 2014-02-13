@@ -67,7 +67,8 @@ describe('RSA', function(){
 	describe('Algebraic Derivatives', function(){
 	    var derivatives = [
 		RSA.Product,
-		RSA.Sum
+		RSA.Sum,
+		RSA.Difference
 	    ];
 	    var m, n;
 
@@ -105,6 +106,15 @@ describe('RSA', function(){
 		    var result = BigNumber('5');
 
 		    expect(sum.source.equals(result)).toBeTruthy();
+		});
+	    });
+
+	    describe('Difference', function(){
+		it('should calculate difference', function(){
+		    var difference = new RSA.Difference(m, n);
+		    var result = BigNumber('-1');
+
+		    expect(difference.source.equals(result)).toBeTruthy();
 		});
 	    });
 	});
