@@ -84,10 +84,21 @@ describe('RSA', function(){
 	    });
 
 	    it('should be Number', function(){
-
 		derivatives.forEach(function(derivative){
 		    var derived = new derivative(m,n);
 		    expect(derived instanceof RSA.Number).toBeTruthy();
+		});
+	    });
+
+	    it('should notify when input changes', function(){
+		derivatives.forEach(function(derivative){
+		    var isCalled = false;
+		    var derived = new derivative(m,n);
+		    derived.addObserver(function(){ isCalled = true; });
+
+		    n.set('5');
+
+		    expect(isCalled).toBeTruthy();
 		});
 	    });
 

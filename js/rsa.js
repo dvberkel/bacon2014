@@ -28,9 +28,12 @@ var RSA = (function(BigNumber){
 
     var derivedNumber = function(calculation){
 	var DerivedNumber = function(){
+	    var callback = this.calculate.bind(this);
 	    this.input = [];
 	    for(var index = 0; index < arguments.length; index++){
-		this.input.push(arguments[index]);
+		var input = arguments[index];
+		input.addObserver(callback);
+		this.input.push(input);
 	    }
 	    this.calculate();
 	};
