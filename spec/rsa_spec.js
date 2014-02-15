@@ -69,7 +69,8 @@ describe('RSA', function(){
 		RSA.Product,
 		RSA.Sum,
 		RSA.Difference,
-		RSA.Modulus
+		RSA.Modulus,
+		RSA.PowerMod
 	    ];
 	    var m, n;
 
@@ -86,7 +87,7 @@ describe('RSA', function(){
 
 	    it('should be Number', function(){
 		derivatives.forEach(function(derivative){
-		    var derived = new derivative(m,n);
+		    var derived = new derivative(m,n,m);
 		    expect(derived instanceof RSA.Number).toBeTruthy();
 		});
 	    });
@@ -94,7 +95,7 @@ describe('RSA', function(){
 	    it('should notify when input changes', function(){
 		derivatives.forEach(function(derivative){
 		    var isCalled = false;
-		    var derived = new derivative(m,n);
+		    var derived = new derivative(m,n,m);
 		    derived.addObserver(function(){ isCalled = true; });
 
 		    n.set('5');
@@ -136,6 +137,18 @@ describe('RSA', function(){
 		    var result = BigNumber('1');
 
 		    expect(modulus.source.equals(result)).toBeTruthy();
+		});
+	    });
+
+	    describe('PowerMod', function(){
+		it('should calculate fast power modulus', function(){
+		    var base = m;
+		    var exponent = n;
+		    var modulus = new RSA.Number('5');
+		    var powerMod = new RSA.PowerMod(base, exponent, modulus);
+		    var result = m.source.toPower(n.source).modulo(modulus.source);
+
+		    expect(powerMod.source.equals(result)).toBeTruthy();
 		});
 	    });
 	});

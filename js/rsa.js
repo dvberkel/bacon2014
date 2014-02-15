@@ -54,6 +54,30 @@ var RSA = (function(BigNumber){
     var Modulus = RSA.Modulus = derivedNumber(function(){
 	this.setSource(this.input[0].source.modulo(this.input[1].source));
     });
+    var PowerMod = RSA.PowerMod = (function(){
+	var zero = BigNumber('0');
+	var two = BigNumber('2');
+	var quotient2 = function(source) { return source.dividedBy(two).floor(); }
+	return derivedNumber(function(){
+	    var result = BigNumber('1');
+	    var square = this.input[0].source;
+	    var q = quotient2(this.input[1].source);
+	    var r = this.input[1].source.modulo(two);
+	    var modulus = this.input[2].source;
+	    while (! q.equals(zero)) {
+		if (! r.equals(zero)) {
+		    result = result.times(square).modulo(modulus);
+		}
+		square = square.times(square);
+		r = q.modulo(two);
+		q = quotient2(q);
+	    }
+	    if (! r.equals(zero)) {
+		result = result.times(square).modulo(modulus);
+	    }
+	    this.setSource(result);
+    })
+    })();
 
     return RSA;
 })(BigNumber);
