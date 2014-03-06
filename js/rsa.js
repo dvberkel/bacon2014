@@ -82,5 +82,19 @@ window.RSA = (function (BigNumber) {
         });
     })();
 
+    var View = RSA.NumberView = function (parent, model) {
+	this.parent = parent;
+	this.model = model;
+	this.model.addObserver(this.update.bind(this));
+	this.update();
+    };
+    View.prototype.update = function () {
+	var container = this.container();
+	container.textContent = this.model.source.toString();
+    };
+    View.prototype.container = function () {
+	return this.parent;
+    };
+
     return RSA;
 })(BigNumber);
