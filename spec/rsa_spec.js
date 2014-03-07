@@ -70,7 +70,8 @@ describe('RSA', function(){
 		RSA.Sum,
 		RSA.Difference,
 		RSA.Modulus,
-		RSA.PowerMod
+		RSA.PowerMod,
+		RSA.Phi
 	    ];
 	    var m, n;
 
@@ -150,6 +151,18 @@ describe('RSA', function(){
 
 		    expect(powerMod.source.equals(result)).toBeTruthy();
 		});
+	    });
+
+	    describe('Phi', function(){
+	    	it('should calculate Euler totient', function(){
+	    	    var one = new BigNumber('1');
+	    	    var p = new RSA.Number('5');
+	    	    var q= new RSA.Number('7');
+	    	    var phi = new RSA.Phi(p, q);
+	    	    var result = p.source.minus(one).times(q.source.minus(one));
+
+	    	    expect(phi.source.equals(result)).toBeTruthy();
+	    	});
 	    });
 	});
     });

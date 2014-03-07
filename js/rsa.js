@@ -81,19 +81,28 @@ window.RSA = (function (BigNumber) {
             this.setSource(result);
         });
     })();
+    RSA.Phi = (function () {
+        var one = new BigNumber('1');
+        return derivedNumber(function () {
+            var pMinus1 = this.input[0].source.minus(one);
+            var qMinus1 = this.input[1].source.minus(one);
+            var phi = pMinus1.times(qMinus1);
+            this.setSource(phi);
+        });
+    })();
 
     var View = RSA.NumberView = function (parent, model) {
-	this.parent = parent;
-	this.model = model;
-	this.model.addObserver(this.update.bind(this));
-	this.update();
+        this.parent = parent;
+        this.model = model;
+        this.model.addObserver(this.update.bind(this));
+        this.update();
     };
     View.prototype.update = function () {
-	var container = this.container();
-	container.textContent = this.model.source.toString();
+        var container = this.container();
+        container.textContent = this.model.source.toString();
     };
     View.prototype.container = function () {
-	return this.parent;
+        return this.parent;
     };
 
     return RSA;
