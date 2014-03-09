@@ -71,7 +71,8 @@ describe('RSA', function(){
 		RSA.Difference,
 		RSA.Modulus,
 		RSA.PowerMod,
-		RSA.Phi
+		RSA.Phi,
+		RSA.Gcd
 	    ];
 	    var m, n;
 
@@ -155,6 +156,18 @@ describe('RSA', function(){
 
 	    describe('Phi', function(){
 	    	it('should calculate Euler totient', function(){
+	    	    var one = new BigNumber('1');
+	    	    var p = new RSA.Number('5');
+	    	    var q= new RSA.Number('7');
+	    	    var phi = new RSA.Phi(p, q);
+	    	    var result = p.source.minus(one).times(q.source.minus(one));
+
+	    	    expect(phi.source.equals(result)).toBeTruthy();
+	    	});
+	    });
+
+	    describe('Gcd', function(){
+	    	it('should calculate greatest common divisor', function(){
 	    	    var one = new BigNumber('1');
 	    	    var p = new RSA.Number('5');
 	    	    var q= new RSA.Number('7');

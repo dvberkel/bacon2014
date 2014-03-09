@@ -90,6 +90,15 @@ window.RSA = (function (BigNumber) {
             this.setSource(phi);
         });
     })();
+    RSA.Gcd = (function () {
+        var one = new BigNumber('1');
+        return derivedNumber(function () {
+            var pMinus1 = this.input[0].source.minus(one);
+            var qMinus1 = this.input[1].source.minus(one);
+            var phi = pMinus1.times(qMinus1);
+            this.setSource(phi);
+        });
+    })();
 
     var View = RSA.NumberView = function (parent, model) {
         this.parent = parent;
