@@ -1,9 +1,13 @@
 [
     "title.md",
     {
-	"filename": "poc.html",
-	"attr": {
-	    "data-state": "poc"
-	}
-    }
+        "filename": "poc.html",
+        "attr": {
+            "data-state": "poc"
+        }
+    },
+    [
+        "introduction.md",
+        "i-am-not.md"
+    ]
 ]
