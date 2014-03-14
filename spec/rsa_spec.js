@@ -260,6 +260,25 @@ describe('RSA', function(){
 		expect(parent.value).toBe('7');
 	    });
 
+	    it('should set value on enter', function(){
+		var view = new RSA.EditableView(parent, n);
+		parent.value = '7';
+
+		view.onEnter({ 'keyCode': 13 });
+
+		expect(n.source.toString()).toBe('7');
+	    });
+
+	    it('should retain value on invalid input', function(){
+		var view = new RSA.EditableView(parent, n);
+		parent.value = 'a';
+
+		view.onEnter({ 'keyCode': 13 });
+
+		expect(n.source.toString()).toBe('5');
+		expect(parent.value).toBe('5');
+	    });
+
 	    afterEach(function(){
 		parent.parentNode.removeChild(parent);
 	    });

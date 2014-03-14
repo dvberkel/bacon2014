@@ -118,6 +118,7 @@ window.RSA = (function (BigNumber) {
         this.parent = parent;
         this.model = model;
         this.model.addObserver(this.update.bind(this));
+        this.parent.addEventListener('keydown', this.onEnter.bind(this));
         this.update();
     };
     Editable.prototype.update = function () {
@@ -126,6 +127,20 @@ window.RSA = (function (BigNumber) {
     };
     Editable.prototype.container = function () {
         return this.parent;
+    };
+    Editable.prototype.onEnter = function (event) {
+        if (event.keyCode === 13) {
+            this.control();
+        }
+    };
+    Editable.prototype.control = function () {
+        var container = this.container();
+        var oldSource = this.model.source;
+        try {
+            this.model.set(container.value);
+        } catch (_) {
+            this.model.setSource(oldSource);
+        }
     };
 
     return RSA;
