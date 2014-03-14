@@ -13,6 +13,7 @@
     var phi = new RSA.Phi(p, q);
 
     Reveal.addEventListener('poc', function () {
+        var input = document.getElementById('entry');
         var pSpan = document.getElementById('p');
         var qSpan = document.getElementById('q');
         var powerSpan = document.getElementById('power');
@@ -22,6 +23,7 @@
         var powerModSpan = document.getElementById('powermod');
         var phiSpan = document.getElementById('phi');
 
+        new RSA.EditableView(input, p);
         new RSA.NumberView(pSpan, p);
         new RSA.NumberView(qSpan, q);
         new RSA.NumberView(powerSpan, power);
