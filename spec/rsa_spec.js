@@ -8,7 +8,7 @@ describe('RSA', function(){
 	    expect(RSA.Observable).toBeDefined();
 	});
 
-	it('should create observalbes', function(){
+	it('should create observables', function(){
 	    expect(new RSA.Observable()).toBeDefined();
 	});
 
