@@ -179,4 +179,95 @@ describe('RSA', function(){
 	    });
 	});
     });
+
+    describe('Views', function(){
+	beforeEach(function(){
+	    var container = document.createElement('div');
+	    container.setAttribute('id', 'test-container');
+	    var body = document.getElementsByTagName('body')[0];
+	    body.appendChild(container);
+	});
+
+	describe('Setup', function(){
+	    it('should have created a test container', function(){
+		var testContainer = document.getElementById('test-container');
+
+		expect(testContainer).toBeDefined();
+	    });
+	});
+
+	describe('Number', function(){
+	    var parent;
+	    var n;
+
+	    beforeEach(function(){
+		parent = document.createElement('span');
+		parent.setAttribute('id', 'Number');
+		var container = document.getElementById('test-container');
+		container.appendChild(parent);
+	    });
+
+	    beforeEach(function(){
+		n = new RSA.Number('5');
+	    });
+
+	    it('should provide a view of its model', function(){
+		new RSA.NumberView(parent, n);
+
+		expect(parent.textContent).toBe('5');
+	    });
+
+	    it('should update when the model changes', function(){
+		new RSA.NumberView(parent, n);
+
+		n.set('7');
+
+		expect(parent.textContent).toBe('7');
+	    });
+
+	    afterEach(function(){
+		parent.parentNode.removeChild(parent);
+	    });
+	});
+
+	describe('Editable', function(){
+	    var parent;
+	    var n;
+
+	    beforeEach(function(){
+		parent = document.createElement('input');
+		parent.setAttribute('id', 'Editable');
+		parent.setAttribute('type', 'text');
+		var container = document.getElementById('test-container');
+		container.appendChild(parent);
+	    });
+
+	    beforeEach(function(){
+		n = new RSA.Number('5');
+	    });
+
+	    it('should provide a view of its model', function(){
+		new RSA.EditableView(parent, n);
+
+		expect(parent.value).toBe('5');
+	    });
+
+	    it('should update when the model changes', function(){
+		new RSA.EditableView(parent, n);
+
+		n.set('7');
+
+		expect(parent.value).toBe('7');
+	    });
+
+	    afterEach(function(){
+		parent.parentNode.removeChild(parent);
+	    });
+	});
+
+	afterEach(function(){
+	    var container = document.getElementById('test-container');
+	    container.parentNode.removeChild(container);
+	});
+    });
 });

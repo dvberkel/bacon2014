@@ -114,5 +114,19 @@ window.RSA = (function (BigNumber) {
         return this.parent;
     };
 
+    var Editable = RSA.EditableView = function (parent, model) {
+        this.parent = parent;
+        this.model = model;
+        this.model.addObserver(this.update.bind(this));
+        this.update();
+    };
+    Editable.prototype.update = function () {
+        var container = this.container();
+        container.value = this.model.source.toString();
+    };
+    Editable.prototype.container = function () {
+        return this.parent;
+    };
+
     return RSA;
 })(BigNumber);
