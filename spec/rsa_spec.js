@@ -284,6 +284,82 @@ describe('RSA', function(){
 	    });
 	});
 
+	describe('EditableNumber', function(){
+	    var parent;
+	    var n;
+
+	    beforeEach(function(){
+		parent = document.createElement('span');
+		parent.setAttribute('id', 'EditableNumber');
+		var container = document.getElementById('test-container');
+		container.appendChild(parent);
+	    });
+
+	    beforeEach(function(){
+		n = new RSA.Number('5');
+	    });
+
+	    it('should create containers for subviews', function(){
+		new RSA.EditableNumberView(parent, n);
+
+		expect(parent.children.length).toBe(2);
+		expect(parent.querySelector('span')).not.toBe(null);
+		expect(parent.querySelector('input')).not.toBe(null);
+	    });
+
+	    it('subviews should have a representation of the model', function(){
+		new RSA.EditableNumberView(parent, n);
+
+		expect(parent.querySelector('span').textContent).toBe('5');
+		expect(parent.querySelector('input').value).toBe('5');
+	    });
+
+	    it('at first only span should be visible', function(){
+		new RSA.EditableNumberView(parent, n);
+
+		expect(parent.querySelector('span').style['display']).toBe('inline');
+		expect(parent.querySelector('input').style['display']).toBe('none');
+	    });
+
+	    it('toggle should switch visibility', function(){
+		var view = new RSA.EditableNumberView(parent, n);
+
+		view.toggle();
+
+		expect(parent.querySelector('span').style['display']).toBe('none');
+		expect(parent.querySelector('input').style['display']).toBe('inline');
+	    });
+
+	    it('click on span should initiate toggle', function(){
+		var view = new RSA.EditableNumberView(parent, n);
+		var event = document.createEvent('HTMLEvents');
+		event.initEvent('click', true, true);
+
+		parent.querySelector('span').dispatchEvent(event);
+
+		expect(parent.querySelector('span').style['display']).toBe('none');
+		expect(parent.querySelector('input').style['display']).toBe('inline');
+	    });
+
+	    it('valid input should toggle as well', function(){
+		var view = new RSA.EditableNumberView(parent, n);
+		var event = document.createEvent('HTMLEvents');
+		event.initEvent('keydown', true, true);
+		event.keyCode = 13;
+
+		var input = parent.querySelector('input');
+		input.value = '7';
+		input.dispatchEvent(event);
+
+		expect(parent.querySelector('span').style['display']).toBe('none');
+		expect(parent.querySelector('input').style['display']).toBe('inline');
+	    });
+
+	    afterEach(function(){
+		parent.parentNode.removeChild(parent);
+	    });
+	});
+
 	afterEach(function(){
 	    var container = document.getElementById('test-container');
 	    container.parentNode.removeChild(container);

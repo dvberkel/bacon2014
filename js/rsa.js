@@ -1,4 +1,4 @@
-/*global BigNumber, window:true*/
+/*global BigNumber, window:true, document*/
 window.RSA = (function (BigNumber) {
     'use strict';
 
@@ -100,47 +100,91 @@ window.RSA = (function (BigNumber) {
         });
     })();
 
-    var View = RSA.NumberView = function (parent, model) {
+    var NumberView = RSA.NumberView = function (parent, model) {
         this.parent = parent;
         this.model = model;
         this.model.addObserver(this.update.bind(this));
         this.update();
     };
-    View.prototype.update = function () {
+    NumberView.prototype.update = function () {
         var container = this.container();
         container.textContent = this.model.source.toString();
     };
-    View.prototype.container = function () {
+    NumberView.prototype.container = function () {
         return this.parent;
     };
 
-    var Editable = RSA.EditableView = function (parent, model) {
+    var EditableView = RSA.EditableView = function (parent, model) {
+        Observable.call(this);
         this.parent = parent;
         this.model = model;
         this.model.addObserver(this.update.bind(this));
         this.parent.addEventListener('keydown', this.onEnter.bind(this));
         this.update();
     };
-    Editable.prototype.update = function () {
+    EditableView.prototype = new Observable();
+    EditableView.prototype.update = function () {
         var container = this.container();
         container.value = this.model.source.toString();
     };
-    Editable.prototype.container = function () {
+    EditableView.prototype.container = function () {
         return this.parent;
     };
-    Editable.prototype.onEnter = function (event) {
+    EditableView.prototype.onEnter = function (event) {
         if (event.keyCode === 13) {
             this.control();
         }
     };
-    Editable.prototype.control = function () {
+    EditableView.prototype.control = function () {
         var container = this.container();
         var oldSource = this.model.source;
         try {
             this.model.set(container.value);
+            this.notify();
         } catch (_) {
             this.model.setSource(oldSource);
         }
+    };
+
+    var EditableNumber = RSA.EditableNumberView = function (parent, model) {
+        this.parent = parent;
+        this.model = model;
+        this.editing = false;
+        this.update();
+    };
+    EditableNumber.prototype.update = function () {
+        var children = this.children();
+        children.number.style.display = this.editing ? 'none': 'inline';
+        children.input.style.display = this.editing ? 'inline': 'none';
+    };
+    EditableNumber.prototype.children = function () {
+        if (!this._children) {
+            var number = this.createNumber();
+            this.parent.appendChild(number);
+            var input = this.createInput();
+            this.parent.appendChild(input);
+            this._children = {
+                'number': number,
+                'input': input
+            };
+        }
+        return this._children;
+    };
+    EditableNumber.prototype.createNumber = function () {
+        var number = document.createElement('span');
+        number.addEventListener('click', this.toggle.bind(this));
+        new NumberView(number, this.model);
+        return number;
+    };
+    EditableNumber.prototype.createInput = function () {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        new EditableView(input, this.model).addObserver(this.toggle.bind(this));
+        return input;
+    };
+    EditableNumber.prototype.toggle = function () {
+        this.editing = !this.editing;
+        this.update();
     };
 
     return RSA;
