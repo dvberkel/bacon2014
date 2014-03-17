@@ -23,7 +23,7 @@
         var powerModSpan = document.getElementById('powermod');
         var phiSpan = document.getElementById('phi');
 
-        new RSA.EditableView(input, p);
+        new RSA.EditableNumberView(input, p);
         new RSA.NumberView(pSpan, p);
         new RSA.NumberView(qSpan, q);
         new RSA.NumberView(powerSpan, power);
