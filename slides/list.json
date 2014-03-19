@@ -12,11 +12,12 @@
     ],
     "trust.md",
     [
-	{
-	    "filename": "p-and-q.html",
-	    "attr": {
-		"data-state": "pq"
-	    }
-	}
+        {
+            "filename": "p-and-q.html",
+            "attr": {
+                "data-state": "pq"
+            }
+        },
+	"prime.md"
     ]
 ]
