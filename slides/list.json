@@ -10,5 +10,13 @@
         "introduction.md",
         "i-am-not.md"
     ],
-    "trust.md"
+    "trust.md",
+    [
+	{
+	    "filename": "p-and-q.html",
+	    "attr": {
+		"data-state": "pq"
+	    }
+	}
+    ]
 ]
