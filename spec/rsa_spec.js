@@ -290,6 +290,7 @@ describe('RSA', function(){
 
 	    beforeEach(function(){
 		parent = document.createElement('span');
+		parent.textContent = 'original';
 		parent.setAttribute('id', 'EditableNumber');
 		var container = document.getElementById('test-container');
 		container.appendChild(parent);
@@ -312,6 +313,12 @@ describe('RSA', function(){
 
 		expect(parent.querySelector('span').textContent).toBe('5');
 		expect(parent.querySelector('input').value).toBe('5');
+	    });
+
+	    it('it should clear the content', function(){
+		new RSA.EditableNumberView(parent, n);
+
+		expect(parent.textContent).not.toContain('original');
 	    });
 
 	    it('at first only span should be visible', function(){

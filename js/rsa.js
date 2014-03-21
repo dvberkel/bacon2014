@@ -150,7 +150,14 @@ window.RSA = (function (BigNumber) {
         this.parent = parent;
         this.model = model;
         this.editing = false;
+        this.clear();
         this.update();
+    };
+    EditableNumber.prototype.clear = function () {
+        while (this.parent.firstChild) {
+            this.parent.removeChild(this.parent.firstChild);
+        }
+
     };
     EditableNumber.prototype.update = function () {
         var children = this.children();
