@@ -1,20 +1,8 @@
-/*global BigNumber, window:true, document*/
-window.RSA = (function (BigNumber) {
+/*global BigNumber, Observable, window:true, document*/
+window.RSA = (function (BigNumber, Observable) {
     'use strict';
 
     var RSA = {};
-
-    var Observable = RSA.Observable = function () {
-        this.observers = [];
-    };
-    Observable.prototype.addObserver = function (observer) {
-        this.observers.push(observer);
-    };
-    Observable.prototype.notify = function () {
-        this.observers.forEach(function (observer) {
-            observer.call(this, this);
-        }.bind(this));
-    };
 
     var rsaNumber = RSA.Number = function (number) {
         Observable.call(this);
@@ -195,4 +183,4 @@ window.RSA = (function (BigNumber) {
     };
 
     return RSA;
-})(BigNumber);
+})(BigNumber, Observable);

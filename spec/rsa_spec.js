@@ -3,33 +3,6 @@ describe('RSA', function(){
 	expect(RSA).toBeDefined();
     });
 
-    describe('Observerable', function(){
-	it('should be defined', function(){
-	    expect(RSA.Observable).toBeDefined();
-	});
-
-	it('should create observables', function(){
-	    expect(new RSA.Observable()).toBeDefined();
-	});
-
-	it('should register observers', function(){
-	    var observable = new RSA.Observable();
-
-	    observable.addObserver(function(){});
-	});
-
-	it('should notify observers', function(){
-	    var isCalled = false;
-	    var observable = new RSA.Observable();
-	    observable.addObserver(function(){ isCalled = true; });
-
-	    observable.notify();
-
-	    expect(isCalled).toBeTruthy();
-	});
-
-    });
-
     describe('Number', function(){
 	it('should be defined', function(){
 	    expect(RSA.Number).toBeDefined();
@@ -51,7 +24,7 @@ describe('RSA', function(){
 	it('should be Observable', function(){
 	    var n = new RSA.Number('2');
 
-	    expect(n instanceof RSA.Observable).toBeTruthy();
+	    expect(n instanceof Observable).toBeTruthy();
 	});
 
 	it('should notify when source is set', function(){
