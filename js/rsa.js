@@ -146,25 +146,25 @@ window.RSA = (function (BigNumber) {
         }
     };
 
-    var EditableNumber = RSA.EditableNumberView = function (parent, model) {
+    var EditableNumberView = RSA.EditableNumberView = function (parent, model) {
         this.parent = parent;
         this.model = model;
         this.editing = false;
         this.clear();
         this.update();
     };
-    EditableNumber.prototype.clear = function () {
+    EditableNumberView.prototype.clear = function () {
         while (this.parent.firstChild) {
             this.parent.removeChild(this.parent.firstChild);
         }
 
     };
-    EditableNumber.prototype.update = function () {
+    EditableNumberView.prototype.update = function () {
         var children = this.children();
         children.number.style.display = this.editing ? 'none': 'inline';
         children.input.style.display = this.editing ? 'inline': 'none';
     };
-    EditableNumber.prototype.children = function () {
+    EditableNumberView.prototype.children = function () {
         if (!this._children) {
             var number = this.createNumber();
             this.parent.appendChild(number);
@@ -177,19 +177,19 @@ window.RSA = (function (BigNumber) {
         }
         return this._children;
     };
-    EditableNumber.prototype.createNumber = function () {
+    EditableNumberView.prototype.createNumber = function () {
         var number = document.createElement('span');
         number.addEventListener('click', this.toggle.bind(this));
         new NumberView(number, this.model);
         return number;
     };
-    EditableNumber.prototype.createInput = function () {
+    EditableNumberView.prototype.createInput = function () {
         var input = document.createElement('input');
         input.setAttribute('type', 'text');
         new EditableView(input, this.model).addObserver(this.toggle.bind(this));
         return input;
     };
-    EditableNumber.prototype.toggle = function () {
+    EditableNumberView.prototype.toggle = function () {
         this.editing = !this.editing;
         this.update();
     };
