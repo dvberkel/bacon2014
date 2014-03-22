@@ -199,6 +199,54 @@ n	});
 	    });
 	});
 
+	describe('View', function(){
+	    var n = 5;
+	    var parent;
+	    var model;
+
+	    beforeEach(function(){
+		parent = document.createElement('span');
+		document.getElementById('test-sieve-container').appendChild(parent);
+	    });
+
+	    beforeEach(function(){
+		model = new Sieve.Model(n);
+	    });
+
+	    it('should be defined', function(){
+		expect(Sieve.View).toBeDefined();
+	    });
+
+ 	    it('should represent the model', function(){
+		new Sieve.View(parent, model);
+
+		expect(parent.children.length).toBe(n);
+	    });
+
+	    it('should represent the numbers', function(){
+		new Sieve.View(parent, model);
+
+		[1, 2, 3, 4, 5].forEach(function(p){
+		    expect(parent.children[p-1].textContent).toBe('' + p);
+		});
+	    });
+
+	    it('should mark the current index', function(){
+		var view = new Sieve.View(parent, model);
+		var currentIndex = model.currentIndex;
+
+		view.children().forEach(function(container, index) {
+		    var classAttribute = container.getAttribute('class');
+		    console.log(container.getAttribute('class'));
+		    if (index === currentIndex) {
+			expect(classAttribute).toBe('current');
+		    } else {
+			expect(classAttribute).toBe('');
+		    }
+		});
+	    });
+	});
+
 	afterEach(function(){
 	    var container = document.getElementById('test-sieve-container');
 	    container.parentNode.removeChild(container);

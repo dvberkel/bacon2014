@@ -77,5 +77,30 @@ window.Sieve = (function (Observable) {
     NumberView.prototype.container = function () {
         return this.parent;
     };
+
+    var View = Sieve.View = function (parent, model) {
+        this.parent = parent;
+        this.model = model;
+        this.update();
+    };
+    View.prototype.update = function () {
+        var children = this.children();
+        children.forEach(function (child, index) {
+            child.setAttribute('class', (index === this.model.currentIndex) ? 'current': '');
+        }.bind(this));
+    };
+    View.prototype.children = function () {
+        if (! this._children) {
+            var numbers = this.model.numbers();
+            var children = this._children = [];
+            for (var index = 0; index < numbers.length; index++) {
+                var container = document.createElement('span');
+                new NumberView(container, numbers[index]);
+                this.parent.appendChild(container);
+                children.push(container);
+            }
+        }
+        return this._children;
+    };
     return Sieve;
 })(Observable);
