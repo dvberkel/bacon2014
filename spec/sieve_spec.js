@@ -140,6 +140,68 @@ describe('Sieve', function(){
 	    [2, 3, 5, 7, 11, 13, 17, 19].forEach(function(prime) {
 		expect(numbers[prime - 1].divisors().length).toBe(0);
 	    });
+n	});
+    });
+
+    describe('Views', function(){
+	beforeEach(function(){
+	    var container = document.createElement('div');
+	    container.setAttribute('id', 'test-sieve-container');
+	    var body = document.getElementsByTagName('body')[0];
+	    body.appendChild(container);
+	});
+
+	describe('Setup', function(){
+	    it('should have created a test container', function(){
+		var testContainer = document.getElementById('test-sieve-container');
+
+		expect(testContainer).toBeDefined();
+	    });
+	});
+
+	describe('Number', function(){
+	    var parent;
+
+	    beforeEach(function(){
+		parent = document.createElement('span');
+		document.getElementById('test-sieve-container').appendChild(parent);
+	    });
+
+	    it('should be defined', function(){
+		expect(Sieve.NumberView).toBeDefined();
+	    });
+
+	    it('should represent the model', function(){
+		var n = new Sieve.Number(4);
+
+		new Sieve.NumberView(parent, n);
+
+		expect(parent.textContent).toBe('4');
+	    });
+
+	    it('should strike through if model has divisors', function(){
+		var n = new Sieve.Number(4);
+		n.addDivisor(2);
+
+		new Sieve.NumberView(parent, n);
+
+		expect(parent.style['text-decoration']).toBe('line-through');
+	    });
+
+	    it('should strike through when the model acquires divisors', function(){
+		var n = new Sieve.Number(4);
+		new Sieve.NumberView(parent, n);
+		expect(parent.style['text-decoration']).toBe('none');
+
+		n.addDivisor(2);
+
+		expect(parent.style['text-decoration']).toBe('line-through');
+	    });
+	});
+
+	afterEach(function(){
+	    var container = document.getElementById('test-sieve-container');
+	    container.parentNode.removeChild(container);
 	});
     });
 });

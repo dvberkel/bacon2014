@@ -58,5 +58,24 @@ window.Sieve = (function (Observable) {
             this.sieveStep();
         }
     };
+
+    var NumberView = Sieve.NumberView = function (parent, model) {
+        this.parent = parent;
+        this.model = model;
+        this.model.addObserver(this.update.bind(this));
+        this.update();
+    };
+    NumberView.prototype.update = function () {
+        var container = this.container();
+        container.textContent = this.model.value();
+        if (this.model.divisors().length > 0) {
+            container.style['text-decoration'] = 'line-through';
+        } else {
+            container.style['text-decoration'] = 'none';
+        }
+    };
+    NumberView.prototype.container = function () {
+        return this.parent;
+    };
     return Sieve;
 })(Observable);
