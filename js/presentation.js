@@ -1,4 +1,4 @@
-/*global Reveal, RSA, document*/
+/*global Reveal, RSA, Sieve, document*/
 (function (Reveal, RSA, Sieve) {
     'use strict';
 
@@ -14,9 +14,9 @@
     });
 
     Reveal.addEventListener('sieve', function () {
-	var model = new Sieve.Model(20);
+        var model = new Sieve.Model(20);
         var container = document.getElementById('prime-sieve');
 
-	new Sieve.View(container, model);
+        new Sieve.ControlView(container, model);
     });
 })(Reveal, RSA, Sieve);

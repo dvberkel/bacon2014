@@ -1,4 +1,4 @@
-/*global Observable, window:true*/
+/*global Observable, window:true, document*/
 window.Sieve = (function (Observable) {
     'use strict';
     var Sieve = {};
@@ -81,7 +81,7 @@ window.Sieve = (function (Observable) {
     var View = Sieve.View = function (parent, model) {
         this.parent = parent;
         this.model = model;
-	this.clear();
+        this.clear();
         this.update();
     };
     View.prototype.clear = function () {
@@ -107,6 +107,31 @@ window.Sieve = (function (Observable) {
             }
         }
         return this._children;
+    };
+
+    var Control = Sieve.ControlView = function (parent, model) {
+        this.parent = parent;
+        this.model = model;
+        this.clear();
+        this.update();
+    };
+    Control.prototype.clear = function () {
+        while (this.parent.firstChild) {
+            this.parent.removeChild(this.parent.firstChild);
+        }
+    };
+    Control.prototype.update = function () {
+        var stepSpan = document.createElement('span');
+        stepSpan.textContent = '>';
+        stepSpan.addEventListener('click', this.model.sieveStep.bind(this.model));
+        var allSpan = document.createElement('span');
+        allSpan.textContent = '>>';
+        allSpan.addEventListener('click', this.model.sieve.bind(this.model));
+        var sieveSpan = document.createElement('span');
+        new Sieve.View(sieveSpan, this.model);
+        [stepSpan, allSpan, sieveSpan].forEach(function (span) {
+            this.parent.appendChild(span);
+        }.bind(this));
     };
     return Sieve;
 })(Observable);

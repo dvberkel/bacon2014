@@ -254,9 +254,57 @@ n	});
 	    });
 	});
 
+	describe('ControlView', function(){
+	    var n = 7;
+	    var parent;
+	    var model;
+
+	    beforeEach(function(){
+		parent = document.createElement('span');
+		parent.textContent = 'original';
+		document.getElementById('test-sieve-container').appendChild(parent);
+	    });
+
+	    beforeEach(function(){
+		model = new Sieve.Model(n);
+	    });
+
+	    it('should be defined', function(){
+		expect(Sieve.ControlView).toBeDefined();
+	    });
+
+ 	    it('should have controls and container', function(){
+		new Sieve.ControlView(parent, model);
+
+		expect(parent.children.length).toBe(3);
+	    });
+
+	    it('should represent the numbers', function(){
+		new Sieve.ControlView(parent, model);
+
+		[1, 2, 3, 4, 5].forEach(function(p){
+		    expect(parent.children[2].children[p-1].textContent).toBe('' + p);
+		});
+	    });
+
+	    it('should represent the controls', function(){
+		new Sieve.ControlView(parent, model);
+
+		expect(parent.children[0].textContent).toBe('>');
+		expect(parent.children[1].textContent).toBe('>>');
+	    });
+
+	    it('should clear the content', function(){
+		var view = new Sieve.ControlView(parent, model);
+
+		expect(parent.textContent).not.toContain('original');
+	    });
+	});
+
 	afterEach(function(){
 	    var container = document.getElementById('test-sieve-container');
 	    container.parentNode.removeChild(container);
 	});
     });
+
 });
