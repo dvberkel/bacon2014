@@ -18,6 +18,12 @@
                 "data-state": "pq"
             }
         },
-	"prime.md"
+        "prime.md",
+	{
+	    "filename": "sieve.html",
+	    "attr": {
+		"data-state": "sieve"
+	    }
+	}
     ]
 ]

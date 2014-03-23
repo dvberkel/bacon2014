@@ -1,5 +1,5 @@
 /*global Reveal, RSA, document*/
-(function (Reveal, RSA) {
+(function (Reveal, RSA, Sieve) {
     'use strict';
 
     var p = new RSA.Number('3');
@@ -12,4 +12,11 @@
         new RSA.EditableNumberView(pInput, p);
         new RSA.EditableNumberView(qInput, q);
     });
-})(Reveal, RSA);
+
+    Reveal.addEventListener('sieve', function () {
+	var model = new Sieve.Model(20);
+        var container = document.getElementById('prime-sieve');
+
+	new Sieve.View(container, model);
+    });
+})(Reveal, RSA, Sieve);
