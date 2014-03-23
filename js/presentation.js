@@ -4,6 +4,7 @@
 
     var p = new RSA.Number('3');
     var q = new RSA.Number('5');
+    var model = new Sieve.Model(20);
 
     Reveal.addEventListener('pq', function () {
         var pInput = document.getElementById('p_input');
@@ -14,7 +15,6 @@
     });
 
     Reveal.addEventListener('sieve', function () {
-        var model = new Sieve.Model(20);
         var container = document.getElementById('prime-sieve');
 
         new Sieve.ControlView(container, model);
