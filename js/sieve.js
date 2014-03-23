@@ -45,6 +45,7 @@ window.Sieve = (function (Observable) {
         return 2 * this.ns[this.currentIndex].value() > this.n;
     };
     Model.prototype.sieveStep = function () {
+	if (this.finished()) { return; }
         var d = this.ns[this.currentIndex].value();
         var index = 2;
         while ((d * index - 1) < this.ns.length) {
