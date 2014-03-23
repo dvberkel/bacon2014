@@ -1,3 +1,7 @@
+.sieve .current {
+    background: rgba(255,0,0,0.5);
+}
+
 .sieve > span:nth-child(2) {
     margin-left: 0.5em;
 }

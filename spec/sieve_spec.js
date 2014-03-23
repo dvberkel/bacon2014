@@ -247,6 +247,24 @@ n	});
 		});
 	    });
 
+	    it('should update the current index after sieveStep', function(){
+		var view = new Sieve.View(parent, model);
+
+		model.sieveStep();
+		var currentIndex = model.currentIndex;
+
+		view.children().forEach(function(container, index) {
+		    var classAttribute = container.getAttribute('class');
+		    console.log(container.getAttribute('class'));
+		    if (index === currentIndex) {
+			expect(classAttribute).toBe('current');
+		    } else {
+			expect(classAttribute).toBe('');
+		    }
+		});
+	    });
+
+
 	    it('should clear the content', function(){
 		var view = new Sieve.View(parent, model);
 

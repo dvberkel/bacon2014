@@ -52,6 +52,7 @@ window.Sieve = (function (Observable) {
             index++;
         }
         while (this.ns[++this.currentIndex].divisors().length > 0) {/* do nothing */}
+        this.notify();
     };
     Model.prototype.sieve = function () {
         while (!this.finished()) {
@@ -81,6 +82,7 @@ window.Sieve = (function (Observable) {
     var View = Sieve.View = function (parent, model) {
         this.parent = parent;
         this.model = model;
+        this.model.addObserver(this.update.bind(this));
         this.clear();
         this.update();
     };
