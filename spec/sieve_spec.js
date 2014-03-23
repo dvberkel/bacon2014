@@ -206,6 +206,7 @@ n	});
 
 	    beforeEach(function(){
 		parent = document.createElement('span');
+		parent.textContent = 'original';
 		document.getElementById('test-sieve-container').appendChild(parent);
 	    });
 
@@ -244,6 +245,12 @@ n	});
 			expect(classAttribute).toBe('');
 		    }
 		});
+	    });
+
+	    it('should clear the content', function(){
+		var view = new Sieve.View(parent, model);
+
+		expect(parent.textContent).not.toContain('original');
 	    });
 	});
 

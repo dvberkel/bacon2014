@@ -81,7 +81,13 @@ window.Sieve = (function (Observable) {
     var View = Sieve.View = function (parent, model) {
         this.parent = parent;
         this.model = model;
+	this.clear();
         this.update();
+    };
+    View.prototype.clear = function () {
+        while (this.parent.firstChild) {
+            this.parent.removeChild(this.parent.firstChild);
+        }
     };
     View.prototype.update = function () {
         var children = this.children();
