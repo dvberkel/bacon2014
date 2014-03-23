@@ -1,0 +1,19 @@
+.sieve > span:nth-child(2) {
+    margin-left: 0.5em;
+}
+
+.sieve > span:nth-child(2):after {
+    content: ":";
+}
+
+.sieve > span:nth-child(3):after {
+    content: "...";
+}
+
+.sieve > span:nth-child(3) > span {
+    margin-left: 0.618em;
+}
+
+.sieve > span:nth-child(3) > span:after {
+    content: ",";
+}
