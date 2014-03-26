@@ -29,8 +29,8 @@
     });
 
     Reveal.addEventListener('factor', function () {
-	var s = new RSA.Number(37);
-	var t = new RSA.Number(53);
+	var s = new RSA.Number('3491');
+	var t = new RSA.Number('6397');
 	var factor = new RSA.Product(s, t);
 
         var factorView = document.getElementById('factor_view');
