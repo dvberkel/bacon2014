@@ -19,11 +19,19 @@
             }
         },
         "prime.md",
-	{
-	    "filename": "sieve.html",
-	    "attr": {
-		"data-state": "sieve"
-	    }
-	}
+        {
+            "filename": "sieve.html",
+            "attr": {
+                "data-state": "sieve"
+            }
+        }
+    ],
+    [
+        {
+            "filename": "n.html",
+            "attr": {
+                "data-state": "n"
+            }
+        }
     ]
 ]
