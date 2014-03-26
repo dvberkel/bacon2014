@@ -32,6 +32,13 @@
             "attr": {
                 "data-state": "n"
             }
-        }
+        },
+        "trapdoor.md",
+	{
+	    "filename": "factor-challenge.html",
+	    "attr": {
+		"data-state": "factor"
+	    }
+	}
     ]
 ]

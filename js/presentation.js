@@ -27,4 +27,14 @@
 
         new RSA.EditableNumberView(nView, N);
     });
+
+    Reveal.addEventListener('factor', function () {
+	var s = new RSA.Number(37);
+	var t = new RSA.Number(53);
+	var factor = new RSA.Product(s, t);
+
+        var factorView = document.getElementById('factor_view');
+
+        new RSA.NumberView(factorView, factor);
+    });
 })(Reveal, RSA, Sieve);
