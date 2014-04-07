@@ -34,11 +34,19 @@
             }
         },
         "trapdoor.md",
-	{
-	    "filename": "factor-challenge.html",
-	    "attr": {
-		"data-state": "factor"
-	    }
-	}
+        {
+            "filename": "factor-challenge.html",
+            "attr": {
+                "data-state": "factor"
+            }
+        }
+    ],
+    [
+        {
+            "filename": "clock-arithmetic.html",
+            "attr": {
+                "data-state": "clock-12"
+            }
+        }
     ]
 ]
