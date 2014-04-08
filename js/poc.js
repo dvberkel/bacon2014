@@ -1,5 +1,5 @@
-/*global Reveal, RSA, document, setTimeout*/
-(function (Reveal, RSA) {
+/*global Reveal, Raphael, RSA, document, setTimeout*/
+(function (Reveal, Raphael, RSA) {
     'use strict';
 
     var power = new RSA.Number('5');
@@ -37,4 +37,13 @@
             p.set(3);
         }, 2000);
     });
-})(Reveal, RSA);
+
+    Reveal.addEventListener('poc-svg', function () {
+        var container = document.getElementById('clock');
+        var paper = Raphael(container, 640, 640);
+
+        var c = paper.circle(320, 320, 310);
+        c.attr({ 'stroke': 'black', 'stroke-width': 5, 'fill': 'white' });
+    });
+
+})(Reveal, Raphael, RSA);
