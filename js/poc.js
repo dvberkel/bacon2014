@@ -46,6 +46,19 @@
 
             var c = paper.circle(320, 320, 310);
             c.attr({ 'stroke': 'black', 'stroke-width': 5, 'fill': 'white' });
+
+            var n = 35;
+            var angle = 360 / n;
+            for (var index = 0; index < n; index++) {
+                var mark = paper.rect(-15, 0, 30, 5);
+                mark.transform('t320,320r' + (angle * index - 90) + 't280,0');
+                mark.attr({ 'stroke': 'black', 'fill': 'black' });
+                if (index === 0) {
+                    mark.attr({ 'stroke': 'red', 'fill': 'red' });
+                }
+            }
+
+
         }
     });
 
