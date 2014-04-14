@@ -38,12 +38,15 @@
         }, 2000);
     });
 
+    var paper;
     Reveal.addEventListener('poc-svg', function () {
         var container = document.getElementById('clock');
-        var paper = Raphael(container, 640, 640);
+        if (!paper) {
+            paper = new Raphael(container, 640, 640);
 
-        var c = paper.circle(320, 320, 310);
-        c.attr({ 'stroke': 'black', 'stroke-width': 5, 'fill': 'white' });
+            var c = paper.circle(320, 320, 310);
+            c.attr({ 'stroke': 'black', 'stroke-width': 5, 'fill': 'white' });
+        }
     });
 
 })(Reveal, Raphael, RSA);
