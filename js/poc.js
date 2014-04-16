@@ -44,16 +44,22 @@
         if (!paper) {
             paper = new Raphael(container, 640, 640);
 
-
             var c = paper.circle(0, 0, 310);
-	    c.transform('t320,320');
             c.attr({ 'stroke': 'black', 'stroke-width': 5, 'fill': 'white' });
+
+            var base = c.matrix.clone();
+            base.translate(320, 320);
+            c.transform(base.toTransformString());
+
 
             var n = 35;
             var angle = 360 / n;
             for (var index = 0; index < n; index++) {
+                var t = base.clone();
+                t.rotate(angle * index - 90, 0, 0);
+                t.translate(280, 0);
                 var mark = paper.rect(-15, -3, 30, 6);
-                mark.transform('t320,320r' + (angle * index - 90) + ',0,0t280,0');
+                mark.transform(t.toTransformString());
                 mark.attr({ 'stroke': 'black', 'fill': 'black' });
                 if (index === 0) {
                     mark.attr({ 'stroke': 'red', 'fill': 'red' });
@@ -61,8 +67,10 @@
             }
 
             var m = 6;
+            var s = base.clone();
+            s.rotate(angle * m - 90, 0, 0);
             var dial = paper.rect(-20, -5, 220, 10);
-	    dial.transform('t320,320r' + (angle * m - 90) + ',0,0');
+            dial.transform(s.toTransformString());
             dial.attr({ 'stroke': 'black', 'fill': 'black' });
 
 
