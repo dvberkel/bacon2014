@@ -79,12 +79,15 @@ window.RSA = (function (BigNumber, Observable) {
         });
     })();
     RSA.Gcd = (function () {
-        var one = new BigNumber('1');
         return derivedNumber(function () {
-            var pMinus1 = this.input[0].source.minus(one);
-            var qMinus1 = this.input[1].source.minus(one);
-            var phi = pMinus1.times(qMinus1);
-            this.setSource(phi);
+            var a = this.input[0].source;
+            var b = this.input[1].source;
+            while (!b.isZero()) {
+                var r = a.modulo(b);
+                a = b;
+                b = r;
+            }
+            this.setSource(a);
         });
     })();
 

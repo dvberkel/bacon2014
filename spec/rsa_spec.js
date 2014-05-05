@@ -141,13 +141,12 @@ describe('RSA', function(){
 
 	    describe('Gcd', function(){
 	    	it('should calculate greatest common divisor', function(){
-	    	    var one = new BigNumber('1');
-	    	    var p = new RSA.Number('5');
-	    	    var q= new RSA.Number('7');
-	    	    var phi = new RSA.Phi(p, q);
-	    	    var result = p.source.minus(one).times(q.source.minus(one));
+	    	    var p = new RSA.Number('2');
+	    	    var q= new RSA.Number('8');
+	    	    var gcd = new RSA.Gcd(p, q);
+	    	    var result = new RSA.Number('2').source;
 
-	    	    expect(phi.source.equals(result)).toBeTruthy();
+	    	    expect(gcd.source.equals(result)).toBeTruthy();
 	    	});
 	    });
 	});
