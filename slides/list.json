@@ -56,5 +56,11 @@
                 "data-state": "clock-12"
             }
         }
-    ]
+    ],
+    {
+	"filename": "phin.html",
+	"attr": {
+	    "data-state": "phi"
+	}
+    }
 ]

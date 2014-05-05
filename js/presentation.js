@@ -2,9 +2,12 @@
 (function (Reveal, RSA, Sieve) {
     'use strict';
 
+    var one = new RSA.Number('1');
+
     var p = new RSA.Number('3');
     var q = new RSA.Number('5');
     var N = new RSA.Product(p, q);
+    var phiN = new RSA.Product(new RSA.Difference(p, one), new RSA.Difference(q, one));
 
     var model = new Sieve.Model(20);
 
@@ -36,5 +39,11 @@
         var factorView = document.getElementById('factor_view');
 
         new RSA.NumberView(factorView, factor);
+    });
+
+    Reveal.addEventListener('phi', function () {
+        var phiView = document.getElementById('phi_view');
+
+        new RSA.NumberView(phiView, phiN);
     });
 })(Reveal, RSA, Sieve);
