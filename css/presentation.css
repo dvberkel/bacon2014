@@ -1,4 +1,26 @@
 /*
+ * Data definition lists
+ */
+dl {
+    margin-left:auto !important;
+    margin-right:auto !important;
+    width: 210px;
+}
+dt {
+    float: left;
+    clear: left;
+    text-align: right;
+    width: 100px;
+
+}
+dd {
+    text-align: left;
+}
+dd:before {
+    content: ":";
+}
+
+/*
  * Sieve related styles
  */
 .sieve .current {
