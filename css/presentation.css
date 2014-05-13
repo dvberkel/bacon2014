@@ -4,20 +4,19 @@
 dl {
     margin-left:auto !important;
     margin-right:auto !important;
-    width: 210px;
+    width: 200px;
 }
 dt {
     float: left;
     clear: left;
     text-align: right;
     width: 100px;
-
+}
+dt:after {
+    content: ":";
 }
 dd {
     text-align: left;
-}
-dd:before {
-    content: ":";
 }
 
 /*
