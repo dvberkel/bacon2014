@@ -45,7 +45,8 @@ describe('RSA', function(){
 		RSA.Modulus,
 		RSA.PowerMod,
 		RSA.Phi,
-		RSA.Gcd
+		RSA.Gcd,
+		RSA.RelativePrimeTo
 	    ];
 	    var m, n;
 
@@ -147,6 +148,16 @@ describe('RSA', function(){
 	    	    var result = new RSA.Number('2').source;
 
 	    	    expect(gcd.source.equals(result)).toBeTruthy();
+	    	});
+	    });
+
+	    describe('RelativePrimeTo', function(){
+	    	it('should calculate a number relative prime to input', function(){
+	    	    var p = new RSA.Number('8');
+	    	    var relativePrime = new RSA.RelativePrimeTo(p);
+	    	    var result = new RSA.Number('3').source;
+
+	    	    expect(relativePrime.source.equals(result)).toBeTruthy();
 	    	});
 	    });
 	});

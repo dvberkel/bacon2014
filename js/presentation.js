@@ -8,6 +8,7 @@
     var q = new RSA.Number('5');
     var N = new RSA.Product(p, q);
     var phiN = new RSA.Product(new RSA.Difference(p, one), new RSA.Difference(q, one));
+    var e = new RSA.RelativePrimeTo(phiN);
 
     var model = new Sieve.Model(20);
 
@@ -45,5 +46,11 @@
         var phiView = document.getElementById('phi_view');
 
         new RSA.NumberView(phiView, phiN);
+    });
+
+    Reveal.addEventListener('exponent', function () {
+        var eView = document.getElementById('e_view');
+
+        new RSA.NumberView(eView, e);
     });
 })(Reveal, RSA, Sieve);

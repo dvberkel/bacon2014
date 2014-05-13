@@ -58,9 +58,17 @@
         }
     ],
     {
-	"filename": "phin.html",
-	"attr": {
-	    "data-state": "phi"
+        "filename": "phin.html",
+        "attr": {
+            "data-state": "phi"
+        }
+    },
+    [
+	{
+	    "filename": "exponent.html",
+	    "attr": {
+		"data-state": "exponent"
+	    }
 	}
-    }
+    ]
 ]

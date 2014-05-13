@@ -33,6 +33,15 @@ window.RSA = (function (BigNumber, Observable) {
         return DerivedNumber;
     };
 
+    var egcd = function (a, b) {
+        while (!b.isZero()) {
+            var r = a.modulo(b);
+            a = b;
+            b = r;
+        }
+        return a;
+    };
+
     RSA.Product = derivedNumber(function () {
         this.setSource(this.input[0].source.times(this.input[1].source));
     });
@@ -80,14 +89,20 @@ window.RSA = (function (BigNumber, Observable) {
     })();
     RSA.Gcd = (function () {
         return derivedNumber(function () {
-            var a = this.input[0].source;
-            var b = this.input[1].source;
-            while (!b.isZero()) {
-                var r = a.modulo(b);
-                a = b;
-                b = r;
+            this.setSource(egcd(this.input[0].source, this.input[1].source));
+        });
+    })();
+    RSA.RelativePrimeTo = (function () {
+        var one = new BigNumber('1');
+        return derivedNumber(function () {
+            var n = this.input[0].source;
+            var candidate = new BigNumber('2');
+            var gcd = egcd(candidate, n);
+            while (!gcd.equals(one)) {
+                candidate = candidate.plus(one);
+                gcd = egcd(candidate, n);
             }
-            this.setSource(a);
+            this.setSource(candidate);
         });
     })();
 
