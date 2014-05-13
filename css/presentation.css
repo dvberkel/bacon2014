@@ -1,4 +1,11 @@
 /*
+ * private and public variables
+ */
+.public {
+    text-decoration: underline;
+}
+
+/*
  * Data definition lists
  */
 dl {
