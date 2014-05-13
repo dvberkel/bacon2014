@@ -1,3 +1,6 @@
+/*
+ * Sieve related styles
+ */
 .sieve .current {
     background: rgba(255,0,0,0.5);
 }
