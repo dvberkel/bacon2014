@@ -46,6 +46,12 @@
             "attr": {
                 "data-state": "clock-12"
             }
+        },
+        {
+            "filename": "addition.html",
+            "attr": {
+                "data-state": "addition"
+            }
         }
     ],
     {
