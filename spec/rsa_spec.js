@@ -264,11 +264,30 @@ describe('RSA', function(){
 		expect(n.source.toString()).toBe('7');
 	    });
 
-	    it('should retain value on invalid input', function(){
+	    it('should set value on blur', function(){
+		var view = new RSA.EditableView(parent, n);
+		parent.value = '7';
+
+		view.onBlur();
+
+		expect(n.source.toString()).toBe('7');
+	    });
+
+	    it('should retain value on invalid input when enter is pressed', function(){
 		var view = new RSA.EditableView(parent, n);
 		parent.value = 'a';
 
 		view.onEnter({ 'keyCode': 13 });
+
+		expect(n.source.toString()).toBe('5');
+		expect(parent.value).toBe('5');
+	    });
+
+	    it('should retain value on invalid input when blurred', function(){
+		var view = new RSA.EditableView(parent, n);
+		parent.value = 'a';
+
+		view.onBlur();
 
 		expect(n.source.toString()).toBe('5');
 		expect(parent.value).toBe('5');
@@ -343,11 +362,24 @@ describe('RSA', function(){
 		expect(parent.querySelector('input').style['display']).toBe('inline');
 	    });
 
-	    it('valid input should toggle as well', function(){
+	    it('valid input should toggle as well when entered', function(){
 		var view = new RSA.EditableNumberView(parent, n);
 		var event = document.createEvent('HTMLEvents');
 		event.initEvent('keydown', true, true);
 		event.keyCode = 13;
+
+		var input = parent.querySelector('input');
+		input.value = '7';
+		input.dispatchEvent(event);
+
+		expect(parent.querySelector('span').style['display']).toBe('none');
+		expect(parent.querySelector('input').style['display']).toBe('inline');
+	    });
+
+	    it('valid input should toggle as well when blurred', function(){
+		var view = new RSA.EditableNumberView(parent, n);
+		var event = document.createEvent('HTMLEvents');
+		event.initEvent('blur', true, true);
 
 		var input = parent.querySelector('input');
 		input.value = '7';

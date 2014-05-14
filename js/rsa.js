@@ -148,6 +148,7 @@ window.RSA = (function (BigNumber, Observable) {
         this.model = model;
         this.model.addObserver(this.update.bind(this));
         this.parent.addEventListener('keydown', this.onEnter.bind(this));
+        this.parent.addEventListener('blur', this.onBlur.bind(this));
         this.update();
     };
     EditableView.prototype = new Observable();
@@ -162,6 +163,9 @@ window.RSA = (function (BigNumber, Observable) {
         if (event.keyCode === 13) {
             this.control();
         }
+    };
+    EditableView.prototype.onBlur = function () {
+        this.control();
     };
     EditableView.prototype.control = function () {
         var container = this.container();
