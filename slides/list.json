@@ -52,6 +52,12 @@
             "attr": {
                 "data-state": "addition"
             }
+        },
+        {
+            "filename": "multiplication.html",
+            "attr": {
+                "data-state": "multiplication"
+            }
         }
     ],
     {
