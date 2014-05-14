@@ -9,6 +9,7 @@
     var N = new RSA.Product(p, q);
     var phiN = new RSA.Product(new RSA.Difference(p, one), new RSA.Difference(q, one));
     var e = new RSA.RelativePrimeTo(phiN);
+    var d = new RSA.Inverse(e, phiN);
 
     var model = new Sieve.Model(20);
 
@@ -52,5 +53,11 @@
         var eView = document.getElementById('e_view');
 
         new RSA.NumberView(eView, e);
+    });
+
+    Reveal.addEventListener('inverse', function () {
+        var dView = document.getElementById('d_view');
+
+        new RSA.NumberView(dView, d);
     });
 })(Reveal, RSA, Sieve);

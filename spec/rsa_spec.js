@@ -46,7 +46,8 @@ describe('RSA', function(){
 		RSA.PowerMod,
 		RSA.Phi,
 		RSA.Gcd,
-		RSA.RelativePrimeTo
+		RSA.RelativePrimeTo,
+		RSA.Inverse
 	    ];
 	    var m, n;
 
@@ -158,6 +159,17 @@ describe('RSA', function(){
 	    	    var result = new RSA.Number('3').source;
 
 	    	    expect(relativePrime.source.equals(result)).toBeTruthy();
+	    	});
+	    });
+
+	    describe('Inverse', function(){
+	    	it('should calculate inverse modulo a number', function(){
+	    	    var a = new RSA.Number('7');
+	    	    var modulus = new RSA.Number('60');
+		    var inverse = new RSA.Inverse(a, modulus);
+	    	    var result = new RSA.Number('43').source;
+
+	    	    expect(inverse.source.equals(result)).toBeTruthy();
 	    	});
 	    });
 	});

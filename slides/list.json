@@ -64,11 +64,19 @@
         }
     },
     [
-	{
-	    "filename": "exponent.html",
-	    "attr": {
-		"data-state": "exponent"
-	    }
-	}
+        {
+            "filename": "exponent.html",
+            "attr": {
+                "data-state": "exponent"
+            }
+        }
+    ],
+    [
+        {
+            "filename": "inverse.html",
+            "attr": {
+                "data-state": "inverse"
+            }
+        }
     ]
 ]

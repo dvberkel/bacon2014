@@ -34,12 +34,23 @@ window.RSA = (function (BigNumber, Observable) {
     };
 
     var egcd = function (a, b) {
+        var s0 = new BigNumber('1');
+        var t0 = new BigNumber('0');
+        var s1 = new BigNumber('0');
+        var t1 = new BigNumber('1');
         while (!b.isZero()) {
             var r = a.modulo(b);
+            var q = a.minus(r).div(b);
+            var s = s0.minus(q.times(s1));
+            var t = t0.minus(q.times(t1));
             a = b;
+            s0 = s1;
+            t0 = t1;
             b = r;
+            s1 = s;
+            t1 = t;
         }
-        return a;
+        return { gcd: a, first: s0, second: t0 };
     };
 
     RSA.Product = derivedNumber(function () {
@@ -89,7 +100,7 @@ window.RSA = (function (BigNumber, Observable) {
     })();
     RSA.Gcd = (function () {
         return derivedNumber(function () {
-            this.setSource(egcd(this.input[0].source, this.input[1].source));
+            this.setSource(egcd(this.input[0].source, this.input[1].source).gcd);
         });
     })();
     RSA.RelativePrimeTo = (function () {
@@ -97,12 +108,23 @@ window.RSA = (function (BigNumber, Observable) {
         return derivedNumber(function () {
             var n = this.input[0].source;
             var candidate = new BigNumber('2');
-            var gcd = egcd(candidate, n);
+            var gcd = egcd(candidate, n).gcd;
             while (!gcd.equals(one)) {
                 candidate = candidate.plus(one);
-                gcd = egcd(candidate, n);
+                gcd = egcd(candidate, n).gcd;
             }
             this.setSource(candidate);
+        });
+    })();
+    RSA.Inverse = (function () {
+        return derivedNumber(function () {
+            var n = this.input[0].source;
+            var modulus = this.input[1].source;
+            var result = egcd(n, modulus);
+            if (result.first.isNegative()) {
+                result.first = result.first.plus(modulus);
+            }
+            this.setSource(result.first);
         });
     })();
 
