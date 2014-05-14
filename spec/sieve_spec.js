@@ -238,7 +238,6 @@ n	});
 
 		view.children().forEach(function(container, index) {
 		    var classAttribute = container.getAttribute('class');
-		    console.log(container.getAttribute('class'));
 		    if (index === currentIndex) {
 			expect(classAttribute).toBe('current');
 		    } else {
@@ -255,7 +254,6 @@ n	});
 
 		view.children().forEach(function(container, index) {
 		    var classAttribute = container.getAttribute('class');
-		    console.log(container.getAttribute('class'));
 		    if (index === currentIndex) {
 			expect(classAttribute).toBe('current');
 		    } else {
