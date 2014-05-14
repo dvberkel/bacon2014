@@ -1,20 +1,6 @@
 [
     "title.md",
     [
-        {
-            "filename": "poc.html",
-            "attr": {
-                "data-state": "poc"
-            }
-        },
-        {
-            "filename": "poc-svg.html",
-            "attr": {
-                "data-state": "poc-svg"
-            }
-        }
-    ],
-    [
         "introduction.md",
         "i-am-not.md"
     ],
