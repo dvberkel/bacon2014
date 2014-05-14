@@ -1,0 +1,1 @@
+![Edward Snowden](image/snowden.jpg)
