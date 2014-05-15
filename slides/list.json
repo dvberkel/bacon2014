@@ -76,7 +76,14 @@
             "attr": {
                 "data-state": "additive-inverse"
             }
+        },
+        {
+            "filename": "multiplicative-inverse.html",
+            "attr": {
+                "data-state": "multiplicative-inverse"
+            }
         }
+
     ],
     {
         "filename": "phin.html",

@@ -72,7 +72,6 @@
                 new RSA.NumberView(resultView, result);
                 new RSA.NumberView(modulusView, N);
             });
-
         });
     })();
 
@@ -103,6 +102,24 @@
 	new RSA.NumberView(modulusViewTry, N);
 
     });
+
+    Reveal.addEventListener('multiplicative-inverse', function () {
+        var left = new RSA.Number('3');
+        var right = new RSA.Number('5');
+        var result = new RSA.Modulus(new RSA.Product(left, right), N);
+
+        var prefix = 'multiplicative_inverse';
+        var leftView = document.getElementById(prefix + '_left');
+        var rightView = document.getElementById(prefix + '_right');
+        var resultView = document.getElementById(prefix + '_result');
+        var modulusView = document.getElementById(prefix + '_modulus');
+
+        new RSA.EditableNumberView(leftView, left);
+        new RSA.EditableNumberView(rightView, right);
+        new RSA.NumberView(resultView, result);
+        new RSA.NumberView(modulusView, N);
+    });
+
 
     Reveal.addEventListener('phi', function () {
         var phiView = document.getElementById('phi_view');
