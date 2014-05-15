@@ -69,7 +69,8 @@
             "attr": {
                 "data-state": "exponentiation"
             }
-        }
+        },
+	"inverse-operations.md"
     ],
     {
         "filename": "phin.html",
