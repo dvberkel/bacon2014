@@ -70,7 +70,13 @@
                 "data-state": "exponentiation"
             }
         },
-	"inverse-operations.md"
+	"inverse-operations.md",
+        {
+            "filename": "additive-inverse.html",
+            "attr": {
+                "data-state": "additive-inverse"
+            }
+        }
     ],
     {
         "filename": "phin.html",

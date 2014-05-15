@@ -76,6 +76,33 @@
         });
     })();
 
+    Reveal.addEventListener('additive-inverse', function () {
+        var known = new RSA.Number('3');
+        var target = new RSA.Number('5');
+        var result = new RSA.Difference(target, known);
+        var resultMod = new RSA.Modulus(new RSA.Sum(result, N), N);
+
+        var knownView = document.getElementById('additive_inverse_known');
+        var targetView = document.getElementById('additive_inverse_target');
+        var modulusView = document.getElementById('additive_inverse_modulus');
+
+        new RSA.EditableNumberView(knownView, known)
+        new RSA.EditableNumberView(targetView, target);
+	new RSA.NumberView(modulusView, N);
+
+        var knownViewTry = document.getElementById('additive_inverse_known_try');
+        var targetViewTry = document.getElementById('additive_inverse_target_try');
+        var resultViewTry = document.getElementById('additive_inverse_result_try');
+        var resultModViewTry = document.getElementById('additive_inverse_result_mod_try');
+        var modulusViewTry = document.getElementById('additive_inverse_modulus_try');
+
+        new RSA.EditableNumberView(knownViewTry, known)
+        new RSA.EditableNumberView(targetViewTry, target);
+	new RSA.NumberView(resultViewTry, result);
+	new RSA.NumberView(resultModViewTry, resultMod);
+	new RSA.NumberView(modulusViewTry, N);
+
+    });
 
     Reveal.addEventListener('phi', function () {
         var phiView = document.getElementById('phi_view');
