@@ -85,9 +85,9 @@
         var targetView = document.getElementById('additive_inverse_target');
         var modulusView = document.getElementById('additive_inverse_modulus');
 
-        new RSA.EditableNumberView(knownView, known)
+        new RSA.EditableNumberView(knownView, known);
         new RSA.EditableNumberView(targetView, target);
-	new RSA.NumberView(modulusView, N);
+        new RSA.NumberView(modulusView, N);
 
         var knownViewTry = document.getElementById('additive_inverse_known_try');
         var targetViewTry = document.getElementById('additive_inverse_target_try');
@@ -95,11 +95,11 @@
         var resultModViewTry = document.getElementById('additive_inverse_result_mod_try');
         var modulusViewTry = document.getElementById('additive_inverse_modulus_try');
 
-        new RSA.EditableNumberView(knownViewTry, known)
+        new RSA.EditableNumberView(knownViewTry, known);
         new RSA.EditableNumberView(targetViewTry, target);
-	new RSA.NumberView(resultViewTry, result);
-	new RSA.NumberView(resultModViewTry, resultMod);
-	new RSA.NumberView(modulusViewTry, N);
+        new RSA.NumberView(resultViewTry, result);
+        new RSA.NumberView(resultModViewTry, resultMod);
+        new RSA.NumberView(modulusViewTry, N);
 
     });
 
@@ -120,6 +120,18 @@
         new RSA.NumberView(modulusView, N);
     });
 
+    Reveal.addEventListener('gcd', function () {
+        var left = new RSA.Number('3');
+        var result = new RSA.Gcd(left, N);
+
+        var leftView = document.getElementById('gcd_left');
+        var rightView = document.getElementById('gcd_right');
+        var resultView = document.getElementById('gcd_result');
+
+        new RSA.EditableNumberView(leftView, left);
+        new RSA.NumberView(rightView, N);
+        new RSA.NumberView(resultView, result);
+    });
 
     Reveal.addEventListener('phi', function () {
         var phiView = document.getElementById('phi_view');
