@@ -38,6 +38,11 @@
             "attr": {
                 "data-state": "factor"
             }
+        },
+        {
+            "attr": {
+                "data-background": "image/multiplication-table.jpg"
+            }
         }
     ],
     [
