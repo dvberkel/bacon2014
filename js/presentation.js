@@ -47,49 +47,32 @@
         var left = new RSA.Number('3');
         var right = new RSA.Number('5');
 
-        Reveal.addEventListener('addition', function () {
-            var result = new RSA.Modulus(new RSA.Sum(left, right), N);
+        [
+            function addition() {
+                return new RSA.Modulus(new RSA.Sum(left, right), N);
+            },
+            function multiplication() {
+                return new RSA.Modulus(new RSA.Product(left, right), N);
+            },
+            function exponentiation() {
+                return new RSA.PowerMod(left, right, N);
+            }
+        ].forEach(function (callback) {
+            Reveal.addEventListener(callback.name, function () {
+                var result = callback();
 
-            var prefix = 'addition';
-            var leftView = document.getElementById(prefix + '_left');
-            var rightView = document.getElementById(prefix + '_right');
-            var resultView = document.getElementById(prefix + '_result');
-            var modulusView = document.getElementById(prefix + '_modulus');
+                var prefix = callback.name;
+                var leftView = document.getElementById(prefix + '_left');
+                var rightView = document.getElementById(prefix + '_right');
+                var resultView = document.getElementById(prefix + '_result');
+                var modulusView = document.getElementById(prefix + '_modulus');
 
-            new RSA.EditableNumberView(leftView, left);
-            new RSA.EditableNumberView(rightView, right);
-            new RSA.NumberView(resultView, result);
-            new RSA.NumberView(modulusView, N);
-        });
+                new RSA.EditableNumberView(leftView, left);
+                new RSA.EditableNumberView(rightView, right);
+                new RSA.NumberView(resultView, result);
+                new RSA.NumberView(modulusView, N);
+            });
 
-        Reveal.addEventListener('multiplication', function () {
-            var result = new RSA.Modulus(new RSA.Product(left, right), N);
-
-            var prefix = 'multiplication';
-            var leftView = document.getElementById(prefix + '_left');
-            var rightView = document.getElementById(prefix + '_right');
-            var resultView = document.getElementById(prefix + '_result');
-            var modulusView = document.getElementById(prefix + '_modulus');
-
-            new RSA.EditableNumberView(leftView, left);
-            new RSA.EditableNumberView(rightView, right);
-            new RSA.NumberView(resultView, result);
-            new RSA.NumberView(modulusView, N);
-        });
-
-        Reveal.addEventListener('exponentiation', function () {
-            var result = new RSA.PowerMod(left, right, N);
-
-            var prefix = 'exponentiation';
-            var leftView = document.getElementById(prefix + '_left');
-            var rightView = document.getElementById(prefix + '_right');
-            var resultView = document.getElementById(prefix + '_result');
-            var modulusView = document.getElementById(prefix + '_modulus');
-
-            new RSA.EditableNumberView(leftView, left);
-            new RSA.EditableNumberView(rightView, right);
-            new RSA.NumberView(resultView, result);
-            new RSA.NumberView(modulusView, N);
         });
     })();
 
