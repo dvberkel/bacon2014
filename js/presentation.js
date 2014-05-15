@@ -77,6 +77,20 @@
             new RSA.NumberView(modulusView, N);
         });
 
+        Reveal.addEventListener('exponentiation', function () {
+            var result = new RSA.PowerMod(left, right, N);
+
+            var prefix = 'exponentiation';
+            var leftView = document.getElementById(prefix + '_left');
+            var rightView = document.getElementById(prefix + '_right');
+            var resultView = document.getElementById(prefix + '_result');
+            var modulusView = document.getElementById(prefix + '_modulus');
+
+            new RSA.EditableNumberView(leftView, left);
+            new RSA.EditableNumberView(rightView, right);
+            new RSA.NumberView(resultView, result);
+            new RSA.NumberView(modulusView, N);
+        });
     })();
 
 

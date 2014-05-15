@@ -63,6 +63,12 @@
             "attr": {
                 "data-state": "multiplication"
             }
+        },
+        {
+            "filename": "exponentiation.html",
+            "attr": {
+                "data-state": "exponentiation"
+            }
         }
     ],
     {
