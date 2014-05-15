@@ -88,7 +88,8 @@
             "attr": {
                 "data-state": "gcd"
             }
-        }
+        },
+	"discrete-log.md"
     ],
     {
         "filename": "phin.html",
