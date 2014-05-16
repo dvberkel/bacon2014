@@ -161,6 +161,8 @@
 	update();
 	var decryptResult = new RSA.PowerMod(localResult, d, N);
 
+	document.getElementById('go').addEventListener('click', update);
+
         var encryptMView = document.getElementById('encrypt_M');
         var encryptEView = document.getElementById('encrypt_e');
         var encryptResultView = document.getElementById('encrypt_result');
