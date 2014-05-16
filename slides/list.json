@@ -114,12 +114,20 @@
         }
     ],
     [
-	"how.md",
+        "how.md",
         {
             "filename": "communication.html",
             "attr": {
                 "data-state": "communication"
             }
         }
-    ]
+    ],
+    [
+        "break-it.md",
+        "obtain.md",
+        "steal.md",
+        "known.md"
+    ],
+    "where-do-we-go.md",
+    "open-source.md"
 ]
