@@ -153,7 +153,13 @@
 
     Reveal.addEventListener('communication', function () {
 	var M = new RSA.Number('3');
-	var result = new RSA.PowerMod(M, e, N);
+	var encryptResult = new RSA.PowerMod(M, e, N);
+	var localResult = new RSA.Number('1');
+	var update = function () {
+	    localResult.setSource(encryptResult.source);
+	}
+	update();
+	var decryptResult = new RSA.PowerMod(localResult, d, N);
 
         var encryptMView = document.getElementById('encrypt_M');
         var encryptEView = document.getElementById('encrypt_e');
@@ -162,7 +168,19 @@
 
         new RSA.EditableNumberView(encryptMView, M);
         new RSA.NumberView(encryptEView, e);
-        new RSA.NumberView(encryptResultView, result);
+        new RSA.NumberView(encryptResultView, encryptResult);
         new RSA.NumberView(encryptModulusView, N);
+
+        var decryptM1View = document.getElementById('decrypt_M1');
+        var decryptM2View = document.getElementById('decrypt_M2');
+        var decryptDView = document.getElementById('decrypt_d');
+        var decryptResultView = document.getElementById('decrypt_result');
+        var decryptModulusView = document.getElementById('decrypt_modulus');
+
+        new RSA.EditableNumberView(decryptM1View, encryptResult);
+        new RSA.EditableNumberView(decryptM2View, encryptResult);
+        new RSA.NumberView(decryptDView, d);
+        new RSA.NumberView(decryptResultView, decryptResult);
+        new RSA.NumberView(decryptModulusView, N);
     });
 })(Reveal, RSA, Sieve);
