@@ -89,7 +89,7 @@
                 "data-state": "gcd"
             }
         },
-	"discrete-log.md"
+        "discrete-log.md"
     ],
     {
         "filename": "phin.html",
@@ -110,6 +110,15 @@
             "filename": "inverse.html",
             "attr": {
                 "data-state": "inverse"
+            }
+        }
+    ],
+    [
+	"how.md",
+        {
+            "filename": "communication.html",
+            "attr": {
+                "data-state": "communication"
             }
         }
     ]

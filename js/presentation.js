@@ -150,4 +150,19 @@
 
         new RSA.NumberView(dView, d);
     });
+
+    Reveal.addEventListener('communication', function () {
+	var M = new RSA.Number('3');
+	var result = new RSA.PowerMod(M, e, N);
+
+        var encryptMView = document.getElementById('encrypt_M');
+        var encryptEView = document.getElementById('encrypt_e');
+        var encryptResultView = document.getElementById('encrypt_result');
+        var encryptModulusView = document.getElementById('encrypt_modulus');
+
+        new RSA.EditableNumberView(encryptMView, M);
+        new RSA.NumberView(encryptEView, e);
+        new RSA.NumberView(encryptResultView, result);
+        new RSA.NumberView(encryptModulusView, N);
+    });
 })(Reveal, RSA, Sieve);
