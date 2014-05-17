@@ -22,4 +22,18 @@ describe('Observerable', function(){
 
 	expect(isCalled).toBeTruthy();
     });
+
+    it('should have an id', function(){
+	var a = new Observable();
+
+	expect(a.observableId).toBeDefined();
+    });
+
+    it('should have an unique id', function(){
+	var a = new Observable();
+	var b = new Observable();
+
+	expect(a.observableId).not.toBe(b.observableId);
+    });
+
 });
