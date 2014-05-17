@@ -18,7 +18,7 @@ window.Observable = (function () {
     };
     Observable.prototype.notify = function () {
         this.observers.forEach(function (observer) {
-            observer.call(this, this);
+            observer.call(this);
         }.bind(this));
     };
 
