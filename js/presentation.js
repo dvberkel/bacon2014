@@ -152,16 +152,16 @@
     });
 
     Reveal.addEventListener('communication', function () {
-	var M = new RSA.Number('3');
-	var encryptResult = new RSA.PowerMod(M, e, N);
-	var localResult = new RSA.Number('1');
-	var update = function () {
-	    localResult.setSource(encryptResult.source);
-	}
-	update();
-	var decryptResult = new RSA.PowerMod(localResult, d, N);
+        var M = new RSA.Number('3');
+        var encryptResult = new RSA.PowerMod(M, e, N);
+        var localResult = new RSA.Number('1');
+        var update = function () {
+            localResult.setSource(encryptResult.source);
+        };
+        update();
+        var decryptResult = new RSA.PowerMod(localResult, d, N);
 
-	document.getElementById('go').addEventListener('click', update);
+        document.getElementById('go').addEventListener('click', update);
 
         var encryptMView = document.getElementById('encrypt_M');
         var encryptEView = document.getElementById('encrypt_e');
