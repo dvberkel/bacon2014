@@ -36,4 +36,14 @@ describe('Observerable', function(){
 	expect(a.observableId).not.toBe(b.observableId);
     });
 
+    it('should pass arguments to notify', function(){
+	var called = false;
+	var a = new Observable();
+	a.addObserver(function(value){ called = value });
+
+	a.notify(true);
+
+	expect(called).toBeTruthy();
+    });
+
 });

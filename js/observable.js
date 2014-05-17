@@ -17,8 +17,9 @@ window.Observable = (function () {
         this.observers.push(observer);
     };
     Observable.prototype.notify = function () {
+        var args = Array.prototype.slice.call(arguments, 0);
         this.observers.forEach(function (observer) {
-            observer.call(this);
+            observer.apply(this, args);
         }.bind(this));
     };
 
