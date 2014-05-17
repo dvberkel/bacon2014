@@ -37,6 +37,17 @@ describe('RSA', function(){
 	    expect(isCalled).toBeTruthy();
 	});
 
+	it('should pass along ancestors', function(){
+	    var chain = [];
+	    var n = new RSA.Number('3');
+	    n.addObserver(function(ancestors){ chain = ancestors; });
+
+	    n.set('4');
+
+	    expect(chain.length).toBe(1);
+	    expect(chain[0]).toBe(n.observableId);
+	});
+
 	describe('Algebraic Derivatives', function(){
 	    var derivatives = [
 		RSA.Product,

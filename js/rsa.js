@@ -12,9 +12,12 @@ window.RSA = (function (BigNumber, Observable) {
     rsaNumber.prototype.set = function (number) {
         this.setSource(new BigNumber(number));
     };
-    rsaNumber.prototype.setSource = function (bigNumber) {
+    rsaNumber.prototype.setSource = function (bigNumber, ancestors) {
+        if (!ancestors) {
+            ancestors = [ this.observableId ];
+        }
         this.source = bigNumber;
-        this.notify();
+        this.notify(ancestors);
     };
 
     var derivedNumber = function (calculation) {
