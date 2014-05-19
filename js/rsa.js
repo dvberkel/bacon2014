@@ -13,9 +13,7 @@ window.RSA = (function (BigNumber, Observable) {
         this.setSource(new BigNumber(number));
     };
     rsaNumber.prototype.setSource = function (bigNumber, ancestors) {
-        if (!ancestors) {
-            ancestors = [];
-        }
+	ancestors = ancestors || [];
         ancestors.push(this.observableId);
         this.source = bigNumber;
         this.notify(ancestors);
@@ -53,12 +51,11 @@ window.RSA = (function (BigNumber, Observable) {
             this.calculate();
         };
         DerivedNumber.prototype = new RSA.Number();
-        DerivedNumber.prototype.calculate = function () {
-            this.setSource(calculation.call(this));
+        DerivedNumber.prototype.calculate = function (ancestors) {
+            this.setSource(calculation.call(this), ancestors);
         };
         return DerivedNumber;
     };
-
     RSA.Product = derivedNumber(function () {
         return (this.input[0].source.times(this.input[1].source));
     });

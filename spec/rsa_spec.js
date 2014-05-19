@@ -92,107 +92,240 @@ describe('RSA', function(){
                 });
             });
 
-            xit('should pass along ancestory', function(){
-                derivatives.forEach(function(derivative){
+            describe('Product', function(){
+                var target;
+
+                beforeEach(function(){
+                    target = new RSA.Product(m, n);
+                });
+
+                it('should calculate product', function(){
+                    var result = BigNumber('6');
+
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+                it('should pass along ancestory', function(){
                     var chain = [];
-                    var derived = new derivative(m,n,m);
-                    derived.addObserver(function(ancestors){ chain = ancestors; });
+                    target.addObserver(function(ancestors) { chain = ancestors; });
 
                     n.set('5');
 
                     expect(chain.length).toBe(2);
-                });
-            });
-
-            describe('Product', function(){
-                it('should calculate product', function(){
-                    var product = new RSA.Product(m, n);
-                    var result = BigNumber('6');
-
-                    expect(product.source.equals(result)).toBeTruthy();
+                    expect(chain[0]).toBe(n.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('Sum', function(){
+                var target;
+
+                beforeEach(function(){
+                    target = new RSA.Sum(m,n);
+                });
+
                 it('should calculate sum', function(){
-                    var sum = new RSA.Sum(m, n);
                     var result = BigNumber('5');
 
-                    expect(sum.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    n.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(n.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('Difference', function(){
+                var target;
+
+                beforeEach(function(){
+                    target = new RSA.Difference(m, n);
+                });
+
                 it('should calculate difference', function(){
-                    var difference = new RSA.Difference(m, n);
                     var result = BigNumber('-1');
 
-                    expect(difference.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
                 });
             });
 
             describe('Modulus', function(){
+                var target;
+
+                beforeEach(function(){
+                    target = new RSA.Modulus(n, m);
+                });
+
                 it('should calculate Modulus', function(){
-                    var modulus = new RSA.Modulus(n, m);
                     var result = BigNumber('1');
 
-                    expect(modulus.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    n.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(n.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('PowerMod', function(){
-                it('should calculate fast power modulus', function(){
+                var target;
+                var modulus;
+
+                beforeEach(function(){
                     var base = m;
                     var exponent = n;
-                    var modulus = new RSA.Number('5');
-                    var powerMod = new RSA.PowerMod(base, exponent, modulus);
+                    modulus = new RSA.Number('5');
+                    target = new RSA.PowerMod(base, exponent, modulus);
+                });
+
+                it('should calculate fast power modulus', function(){
                     var result = m.source.toPower(n.source).modulo(modulus.source);
 
-                    expect(powerMod.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    n.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(n.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('Phi', function(){
+                var one;
+                var p;
+                var q;
+                var target;
+
+                beforeEach(function(){
+                    one = new BigNumber('1');
+                    p = new RSA.Number('5');
+                    q = new RSA.Number('7');
+                    target = new RSA.Phi(p, q);
+                });
+
                 it('should calculate Euler totient', function(){
-                    var one = new BigNumber('1');
-                    var p = new RSA.Number('5');
-                    var q= new RSA.Number('7');
-                    var phi = new RSA.Phi(p, q);
                     var result = p.source.minus(one).times(q.source.minus(one));
 
-                    expect(phi.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    p.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(p.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('Gcd', function(){
+                var p;
+                var q;
+                var target;
+
+                beforeEach(function(){
+                    p = new RSA.Number('2');
+                    q = new RSA.Number('8');
+                    target = new RSA.Gcd(p, q);
+                });
+
                 it('should calculate greatest common divisor', function(){
-                    var p = new RSA.Number('2');
-                    var q= new RSA.Number('8');
-                    var gcd = new RSA.Gcd(p, q);
                     var result = new RSA.Number('2').source;
 
-                    expect(gcd.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    p.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(p.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('RelativePrimeTo', function(){
+                var p;
+                var target;
+
+                beforeEach(function(){
+                    p = new RSA.Number('8');
+                    target = new RSA.RelativePrimeTo(p);
+                });
+
                 it('should calculate a number relative prime to input', function(){
-                    var p = new RSA.Number('8');
-                    var relativePrime = new RSA.RelativePrimeTo(p);
                     var result = new RSA.Number('3').source;
 
-                    expect(relativePrime.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    p.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(p.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
 
             describe('Inverse', function(){
+                var a;
+                var modulus;
+                var target;
+
+                beforeEach(function(){
+                    a = new RSA.Number('7');
+                    modulus = new RSA.Number('60');
+                    target = new RSA.Inverse(a, modulus);
+                });
+
                 it('should calculate inverse modulo a number', function(){
-                    var a = new RSA.Number('7');
-                    var modulus = new RSA.Number('60');
-                    var inverse = new RSA.Inverse(a, modulus);
                     var result = new RSA.Number('43').source;
 
-                    expect(inverse.source.equals(result)).toBeTruthy();
+                    expect(target.source.equals(result)).toBeTruthy();
+                });
+
+
+                it('should pass along ancestory', function(){
+                    var chain = [];
+                    target.addObserver(function(ancestors) { chain = ancestors; });
+
+                    a.set('5');
+
+                    expect(chain.length).toBe(2);
+                    expect(chain[0]).toBe(a.observableId);
+                    expect(chain[1]).toBe(target.observableId);
                 });
             });
         });
