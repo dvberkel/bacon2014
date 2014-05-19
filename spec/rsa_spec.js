@@ -328,6 +328,20 @@ describe('RSA', function(){
                     expect(chain[1]).toBe(target.observableId);
                 });
             });
+
+            describe('loop detection', function(){
+                it('should prevent loops to cause problems', function(){
+                    var a = new RSA.Number('1');
+                    var b = new RSA.Number('2');
+                    var target = new RSA.Product(a, b);
+                    var result = new BigNumber('2');
+                    target.addObserver(function(ancestors){ a.setSource(new BigNumber('3'), ancestors); });
+
+                    a.set('2');
+
+                    expect(a.source.equals(result)).toBeTruthy();
+                });
+            });
         });
     });
 

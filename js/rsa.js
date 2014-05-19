@@ -13,10 +13,12 @@ window.RSA = (function (BigNumber, Observable) {
         this.setSource(new BigNumber(number));
     };
     rsaNumber.prototype.setSource = function (bigNumber, ancestors) {
-	ancestors = ancestors || [];
-        ancestors.push(this.observableId);
-        this.source = bigNumber;
-        this.notify(ancestors);
+        ancestors = ancestors || [];
+        if (ancestors.indexOf(this.observableId) === -1) {
+            ancestors.push(this.observableId);
+            this.source = bigNumber;
+            this.notify(ancestors);
+        }
     };
 
     var egcd = function (a, b) {
