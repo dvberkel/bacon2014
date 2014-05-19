@@ -20,22 +20,6 @@ window.RSA = (function (BigNumber, Observable) {
         this.notify(ancestors);
     };
 
-    var derivedNumber = function (calculation) {
-        var DerivedNumber = function () {
-            var callback = this.calculate.bind(this);
-            this.input = [];
-            for (var index = 0; index < arguments.length; index++) {
-                var input = arguments[index];
-                input.addObserver(callback);
-                this.input.push(input);
-            }
-            this.calculate();
-        };
-        DerivedNumber.prototype = new RSA.Number();
-        DerivedNumber.prototype.calculate = calculation;
-        return DerivedNumber;
-    };
-
     var egcd = function (a, b) {
         var s0 = new BigNumber('1');
         var t0 = new BigNumber('0');
@@ -54,6 +38,22 @@ window.RSA = (function (BigNumber, Observable) {
             t1 = t;
         }
         return { gcd: a, first: s0, second: t0 };
+    };
+
+    var derivedNumber = function (calculation) {
+        var DerivedNumber = function () {
+            var callback = this.calculate.bind(this);
+            this.input = [];
+            for (var index = 0; index < arguments.length; index++) {
+                var input = arguments[index];
+                input.addObserver(callback);
+                this.input.push(input);
+            }
+            this.calculate();
+        };
+        DerivedNumber.prototype = new RSA.Number();
+        DerivedNumber.prototype.calculate = calculation;
+        return DerivedNumber;
     };
 
     RSA.Product = derivedNumber(function () {
