@@ -52,21 +52,23 @@ window.RSA = (function (BigNumber, Observable) {
             this.calculate();
         };
         DerivedNumber.prototype = new RSA.Number();
-        DerivedNumber.prototype.calculate = calculation;
+        DerivedNumber.prototype.calculate = function () {
+            this.setSource(calculation.call(this));
+        };
         return DerivedNumber;
     };
 
     RSA.Product = derivedNumber(function () {
-        this.setSource(this.input[0].source.times(this.input[1].source));
+        return (this.input[0].source.times(this.input[1].source));
     });
     RSA.Sum = derivedNumber(function () {
-        this.setSource(this.input[0].source.plus(this.input[1].source));
+        return (this.input[0].source.plus(this.input[1].source));
     });
     RSA.Difference = derivedNumber(function () {
-        this.setSource(this.input[0].source.minus(this.input[1].source));
+        return (this.input[0].source.minus(this.input[1].source));
     });
     RSA.Modulus = derivedNumber(function () {
-        this.setSource(this.input[0].source.modulo(this.input[1].source));
+        return (this.input[0].source.modulo(this.input[1].source));
     });
     RSA.PowerMod = (function () {
         var zero = new BigNumber('0');
@@ -89,7 +91,7 @@ window.RSA = (function (BigNumber, Observable) {
             if (! r.equals(zero)) {
                 result = result.times(square).modulo(modulus);
             }
-            this.setSource(result);
+            return (result);
         });
     })();
     RSA.Phi = (function () {
@@ -98,12 +100,12 @@ window.RSA = (function (BigNumber, Observable) {
             var pMinus1 = this.input[0].source.minus(one);
             var qMinus1 = this.input[1].source.minus(one);
             var phi = pMinus1.times(qMinus1);
-            this.setSource(phi);
+            return (phi);
         });
     })();
     RSA.Gcd = (function () {
         return derivedNumber(function () {
-            this.setSource(egcd(this.input[0].source, this.input[1].source).gcd);
+            return (egcd(this.input[0].source, this.input[1].source).gcd);
         });
     })();
     RSA.RelativePrimeTo = (function () {
@@ -116,7 +118,7 @@ window.RSA = (function (BigNumber, Observable) {
                 candidate = candidate.plus(one);
                 gcd = egcd(candidate, n).gcd;
             }
-            this.setSource(candidate);
+            return (candidate);
         });
     })();
     RSA.Inverse = (function () {
@@ -127,7 +129,7 @@ window.RSA = (function (BigNumber, Observable) {
             if (result.first.isNegative()) {
                 result.first = result.first.plus(modulus);
             }
-            this.setSource(result.first);
+            return (result.first);
         });
     })();
 

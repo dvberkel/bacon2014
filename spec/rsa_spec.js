@@ -92,6 +92,18 @@ describe('RSA', function(){
                 });
             });
 
+            xit('should pass along ancestory', function(){
+                derivatives.forEach(function(derivative){
+                    var chain = [];
+                    var derived = new derivative(m,n,m);
+                    derived.addObserver(function(ancestors){ chain = ancestors; });
+
+                    n.set('5');
+
+                    expect(chain.length).toBe(2);
+                });
+            });
+
             describe('Product', function(){
                 it('should calculate product', function(){
                     var product = new RSA.Product(m, n);
