@@ -334,7 +334,7 @@ describe('RSA', function(){
                     var a = new RSA.Number('1');
                     var b = new RSA.Number('2');
                     var target = new RSA.Product(a, b);
-                    var result = new BigNumber('2');
+                    var result = new BigNumber('3');
                     target.addObserver(function(ancestors){ a.setSource(new BigNumber('3'), ancestors); });
 
                     a.set('2');

@@ -14,9 +14,9 @@ window.RSA = (function (BigNumber, Observable) {
     };
     rsaNumber.prototype.setSource = function (bigNumber, ancestors) {
         ancestors = ancestors || [];
+        this.source = bigNumber;
         if (ancestors.indexOf(this.observableId) === -1) {
             ancestors.push(this.observableId);
-            this.source = bigNumber;
             this.notify(ancestors);
         }
     };
